@@ -1,2 +1,8 @@
 # CMPSC463
-COMSC463 Final Project
+**Tasks**
+> * Making a GUI
+>
+> * Making a more complicated maze
+>   * Make more path
+>   * Make more room
+>   * Make more ending
