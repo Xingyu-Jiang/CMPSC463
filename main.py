@@ -1,3 +1,5 @@
+import pickle
+
 class MazeNode:
     def __init__(self):
         self.left_node = None
@@ -28,6 +30,8 @@ class MazeNode:
 
     def set_prompt(self, prompt):
         self.prompt = prompt
+
+
 
 
 class Maze:
@@ -81,27 +85,57 @@ class DecisionMazeAdventure:
     def __init__(self):
         self.maze = Maze()
         self.endings = []
+    ''' 
+        self.visitied_nodes=[]
+        self.score = 0
+    ''' 
 
     def start_game(self):
+        '''
+        try:
+            with open('savegame.pkl', 'rb') as f:
+                self.visited_nodes = pickle.load(f)
+        except FileNotFoundError:
+            pass
+        '''
+
         self.maze.generate_maze()
         self.navigate_maze(self.maze.get_root_node())
 
     def navigate_maze(self, current_node):
         while True:
+
+            '''
+            self.visited_nodes.append(current_node)
+            '''
+
+
             if current_node.is_decision():
                 print(current_node.get_prompt())
-                choice = input("Enter your choice (l/r): ").lower()
+                choice = input("Enter your choice (l/r/b), b for undo: ").lower()
                 if choice == 'l':
                     current_node = current_node.get_left_node()
                 elif choice == 'r':
                     current_node = current_node.get_right_node()
+
+                '''    
+                elif choice == 'b':
+                    self.visited_nodes.pop()  # remove current node
+                    current_node = self.visited_nodes.pop()  # set previous node as current'''
+
                 else:
                     print("Invalid choice. Please choose again.")
                     continue
             else:
                 self.endings.append(current_node.get_prompt())
                 print(f"You've reached an ending: {current_node.get_prompt()}")
+                # print(f"Your score: {self.score}")
                 break
+        '''
+        # Save progress
+        with open('savegame.pkl', 'wb') as f:
+            pickle.dump(self.visited_nodes, f)  
+        '''
 
 
 def main():
