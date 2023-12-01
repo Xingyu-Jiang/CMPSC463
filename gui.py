@@ -1,5 +1,6 @@
 import tkinter as tk
-import main
+import maze
+
 
 class MazeGUI:
     def __init__(self, maze):
@@ -40,7 +41,9 @@ class MazeGUI:
     def run(self):
         self.window.mainloop()
 
-#need to finish up
-maze = main.Maze()  
+"""
+# need to finish up
+maze = main.Maze()
 gui = MazeGUI(maze)
 gui.run()
+"""
