@@ -1,4 +1,4 @@
-import networkx as nx
+from collections import deque
 
 
 class MazeNode:
@@ -115,26 +115,64 @@ class Maze:
 
         self.root_node = node1
 
-    def maze_to_graph(self):
-        maze_graph = nx.DiGraph()  # Creating a directed graph
+    def to_graph(self):
+        graph = {}
 
-        # Traverse the maze to add nodes and edges to the graph
-        queue = [self.root_node]
+        def traverse(node):
+            if node:
+                graph[node.get_node_id()] = {
+                    "prompt": node.get_prompt(),
+                    "left_node": node.get_left_node().get_node_id() if node.get_left_node() else None,
+                    "right_node": node.get_right_node().get_node_id() if node.get_right_node() else None,
+                    "parent_node": node.get_parent_node().get_node_id() if node.get_parent_node() else None,
+                    "is_decision_node": node.is_decision()
+                }
+                traverse(node.get_left_node())
+                traverse(node.get_right_node())
+
+        traverse(self.root_node)
+        return graph
+
+    def print_edges(self):
+        graph = self.to_graph()
+        for node_id, data in graph.items():
+            left_node = data["left_node"]
+            right_node = data["right_node"]
+            parent_node = data["parent_node"]
+
+            if left_node is not None:
+                print(f"Edge: {node_id} -> {left_node}")
+            if right_node is not None:
+                print(f"Edge: {node_id} -> {right_node}")
+            if parent_node is not None:
+                print(f"Edge: {node_id} -> {parent_node}")
+
+    def shortest_path(self, start_node_id, end_node_id):
+        graph = self.to_graph()
+
+        # Check if start_node_id or end_node_id not in the graph
+        if start_node_id not in graph or end_node_id not in graph:
+            return None
+
+        visited = set()
+        queue = deque([(start_node_id, [start_node_id])])
+
         while queue:
-            current_node = queue.pop(0)
-            maze_graph.add_node(current_node.get_node_id(), prompt=current_node.get_prompt())
+            current_node, path = queue.popleft()
+            visited.add(current_node)
 
-            left_node = current_node.get_left_node()
-            if left_node:
-                maze_graph.add_edge(current_node.get_node_id(), left_node.get_node_id())
-                queue.append(left_node)
+            if current_node == end_node_id:
+                return path
 
-            right_node = current_node.get_right_node()
-            if right_node:
-                maze_graph.add_edge(current_node.get_node_id(), right_node.get_node_id())
-                queue.append(right_node)
+            neighbors = [graph[current_node]['left_node'],
+                         graph[current_node]['right_node'],
+                         graph[current_node]['parent_node']]
 
-        return maze_graph
+            for neighbor in neighbors:
+                if neighbor and neighbor not in visited:
+                    queue.append((neighbor, path + [neighbor]))
+
+        return None
 
 
 class DecisionMazeAdventure:
