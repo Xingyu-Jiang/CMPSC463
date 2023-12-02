@@ -84,12 +84,11 @@ class Maze:
         node6.set_parent_node(node8)
         node7.set_parent_node(node8)
         node8.set_node_id(8)
- 
+
         node9 = MazeNode()
         node9.set_decision_node(False)
         node9.set_prompt("Node 9: End")
         node9.set_node_id(9)
-
 
         node4 = MazeNode()
         node4.set_decision_node(True)
@@ -136,11 +135,9 @@ class Maze:
         def traverse(node):
             if node:
                 graph[node.get_node_id()] = {
-                    "prompt": node.get_prompt(),
                     "left_node": node.get_left_node().get_node_id() if node.get_left_node() else None,
                     "right_node": node.get_right_node().get_node_id() if node.get_right_node() else None,
                     "parent_node": node.get_parent_node().get_node_id() if node.get_parent_node() else None,
-                    "is_decision_node": node.is_decision()
                 }
                 traverse(node.get_left_node())
                 traverse(node.get_right_node())
@@ -188,35 +185,58 @@ class Maze:
                     queue.append((neighbor, path + [neighbor]))
 
         return None
-    
 
-
-    def depth_first_search(self, start_node_id, end_node_id):
+    def breath_first_search(self, start_node_id):
         graph = self.to_graph()
 
-        if start_node_id not in graph or end_node_id not in graph:
-            return None
+        visited = []
+        queue = deque([(start_node_id, [start_node_id])])
 
-        visited = set()
+        while queue:
+            current_node, path = queue.popleft()
+
+            if current_node not in visited:
+                visited.append(current_node)
+
+                print(f"Visited Node {current_node}: {graph[current_node]}")
+
+                neighbors = [
+                    graph[current_node]['left_node'],
+                    graph[current_node]['right_node'],
+                    graph[current_node]['parent_node']
+                ]
+
+                for neighbor in neighbors:
+                    if neighbor and neighbor not in visited:
+                        queue.append((neighbor, path + [neighbor]))
+
+        return visited
+
+    def depth_first_search(self, start_node_id):
+        graph = self.to_graph()
+
+        visited = []
         stack = [(start_node_id, [start_node_id])]
 
         while stack:
             current_node, path = stack.pop()
-            visited.add(current_node)
 
-            if current_node == end_node_id:
-                return path
+            if current_node not in visited:
+                visited.append(current_node)
 
-            neighbors = [graph[current_node]['left_node'],
-                         graph[current_node]['right_node'],
-                         graph[current_node]['parent_node']]
+                print(f"Visited Node {current_node}: {graph[current_node]}")
 
-            for neighbor in neighbors:
-                if neighbor and neighbor not in visited:
-                    stack.append((neighbor, path + [neighbor]))
+                neighbors = [
+                    graph[current_node]['left_node'],
+                    graph[current_node]['right_node'],
+                    graph[current_node]['parent_node']
+                ]
 
-        return None
-    
+                for neighbor in neighbors:
+                    if neighbor and neighbor not in visited:
+                        stack.append((neighbor, path + [neighbor]))
+
+        return visited
 
 
 class DecisionMazeAdventure:

@@ -11,7 +11,7 @@ class MazeGUI:
         self.current_node = self.game.maze.get_root_node()
 
         self.master.title("Decision Maze Adventure")
-        self.master.geometry("325x220")
+        self.master.geometry("325x270")
 
         self.text_box = tk.Text(master, height=5, width=40)
         self.text_box.insert(tk.END, self.current_node.get_prompt())
@@ -30,8 +30,11 @@ class MazeGUI:
         self.show_path_button = tk.Button(master, text=" Show Shortest Path ", command=self.show_shortest_path)
         self.show_path_button.grid(row=2, column=0, columnspan=3, pady=10)
 
-        self.show_dfs_button = tk.Button(master, text=" Show DFS Path ", command=self.show_depth_first_path)
-        self.show_dfs_button.grid(row=3, column=0, columnspan=3, pady=10)
+        self.show_path_button = tk.Button(master, text=" Show BFS ", command=self.show_breath_first_search)
+        self.show_path_button.grid(row=3, column=0, columnspan=3, pady=10)
+
+        self.show_dfs_button = tk.Button(master, text=" Show DFS ", command=self.show_depth_first_path)
+        self.show_dfs_button.grid(row=4, column=0, columnspan=3, pady=10)
 
     def go_left(self):
         self.navigate('l')
@@ -82,10 +85,19 @@ class MazeGUI:
         else:
             tk.messagebox.showinfo("Shortest Path", "No valid path found.", icon='info')
 
+    def show_breath_first_search(self):
+        start_node_id = 1
+        breath_first_search = self.game.maze.breath_first_search(start_node_id)
+
+        if breath_first_search:
+            path_str = ' -> '.join(str(node_id) for node_id in breath_first_search)
+            tk.messagebox.showinfo("Breath First Search", f"Breath First Search: {path_str}", icon='info')
+        else:
+            tk.messagebox.showinfo("Breath First Search", "No valid path found.", icon='info')
+
     def show_depth_first_path(self):
         start_node_id = 1
-        end_node_id = 7
-        depth_first_path = self.game.maze.depth_first_search(start_node_id, end_node_id)
+        depth_first_path = self.game.maze.depth_first_search(start_node_id)
 
         if depth_first_path:
             path_str = ' -> '.join(str(node_id) for node_id in depth_first_path)
