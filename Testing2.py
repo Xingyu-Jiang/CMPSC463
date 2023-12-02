@@ -34,9 +34,9 @@ class MazeGUI:
 
     def navigate(self, choice):
         if choice == 'b':
-            if len(self.game.path_taken) >= 2:
-                self.game.path_taken.pop()  # remove current node
-                self.current_node = self.game.path_taken.pop()  # set previous node as current
+            if self.current_node.get_parent_node() is not None:
+                temp = self.current_node
+                self.current_node = temp.get_parent_node()
                 self.update_prompt()
             else:
                 print("Cannot backtrack further.")
@@ -44,8 +44,9 @@ class MazeGUI:
             if choice in ['l', 'r']:
                 next_node = self.current_node.get_left_node() if choice == 'l' else self.current_node.get_right_node()
                 if next_node:
+                    temp = next_node
+                    self.current_node = temp
                     self.game.path_taken.append(self.current_node)
-                    self.current_node = next_node
                     self.update_prompt()
 
     def update_prompt(self):
