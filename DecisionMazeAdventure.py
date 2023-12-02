@@ -242,7 +242,6 @@ class Maze:
 class DecisionMazeAdventure:
     def __init__(self):
         self.maze = Maze()
-        self.endings = []
         self.path_taken = []
 
     def start_game(self):
