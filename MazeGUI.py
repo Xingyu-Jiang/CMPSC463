@@ -1,5 +1,5 @@
 import tkinter as tk
-from Testing import *
+from DecisionMazeAdventure import *
 
 
 class MazeGUI:
@@ -53,7 +53,7 @@ class MazeGUI:
         if self.current_node.is_decision():
             self.label.config(text=self.current_node.get_prompt())
         else:
-            self.label.config(text=f"You've reached an ending: {self.current_node.get_prompt()}")
+            self.label.config(text=self.current_node.get_prompt())
 
 
 def main():

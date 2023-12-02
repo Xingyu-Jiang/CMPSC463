@@ -8,7 +8,7 @@ class MazeNode:
         self.parent_node = None
         self.is_decision_node = False
         self.prompt = ""
-        self.nodeid = int()
+        self.node_id = int()
 
     def get_left_node(self):
         return self.left_node
@@ -40,11 +40,11 @@ class MazeNode:
     def set_prompt(self, prompt):
         self.prompt = prompt
 
-    def get_nodeid(self):
-        return self.nodeid
+    def get_node_id(self):
+        return self.node_id
 
-    def set_nodeid(self, id):
-        self.nodeid = id
+    def set_node_id(self, node_id):
+        self.node_id = node_id
 
 
 class Maze:
@@ -73,17 +73,17 @@ class Maze:
         node4.set_right_node(node7)
         node6.set_parent_node(node4)
         node7.set_parent_node(node4)
-        node4.set_nodeid(4)
+        node4.set_node_id(4)
 
         node5 = MazeNode()
         node5.set_decision_node(False)
         node5.set_prompt("Node 5: End")
-        node5.set_nodeid(5)
+        node5.set_node_id(5)
 
         node2 = MazeNode()
         node2.set_decision_node(False)
         node2.set_prompt("Node 2: End")
-        node2.set_nodeid(2)
+        node2.set_node_id(2)
 
         node3 = MazeNode()
         node3.set_decision_node(True)
@@ -92,7 +92,7 @@ class Maze:
         node3.set_right_node(node5)
         node4.set_parent_node(node3)
         node5.set_parent_node(node3)
-        node3.set_nodeid(3)
+        node3.set_node_id(3)
 
         node1 = MazeNode()
         node1.set_decision_node(True)
@@ -102,7 +102,7 @@ class Maze:
 
         node3.set_parent_node(node1)
         node2.set_parent_node(node1)
-        node1.set_nodeid(1)
+        node1.set_node_id(1)
         self.root_node = node1
 
 
