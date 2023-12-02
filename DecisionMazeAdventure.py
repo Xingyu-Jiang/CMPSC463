@@ -76,12 +76,27 @@ class Maze:
         node7.set_prompt("Node 7: End")
         node7.set_node_id(7)
 
+        node8 = MazeNode()
+        node8.set_decision_node(True)
+        node8.set_prompt("Node 8: left(node 6) or right (node 7)")
+        node8.set_left_node(node6)
+        node8.set_right_node(node7)
+        node6.set_parent_node(node8)
+        node7.set_parent_node(node8)
+        node8.set_node_id(8)
+ 
+        node9 = MazeNode()
+        node9.set_decision_node(False)
+        node9.set_prompt("Node 9: End")
+        node9.set_node_id(9)
+
+
         node4 = MazeNode()
         node4.set_decision_node(True)
-        node4.set_prompt("Node 4: left(node 6) or right (node 7)")
-        node4.set_left_node(node6)
+        node4.set_prompt("Node 4: left(node 8) or right (node 7)")
+        node4.set_left_node(node8)
         node4.set_right_node(node7)
-        node6.set_parent_node(node4)
+        node8.set_parent_node(node4)
         node7.set_parent_node(node4)
         node4.set_node_id(4)
 
@@ -173,6 +188,35 @@ class Maze:
                     queue.append((neighbor, path + [neighbor]))
 
         return None
+    
+
+
+    def depth_first_search(self, start_node_id, end_node_id):
+        graph = self.to_graph()
+
+        if start_node_id not in graph or end_node_id not in graph:
+            return None
+
+        visited = set()
+        stack = [(start_node_id, [start_node_id])]
+
+        while stack:
+            current_node, path = stack.pop()
+            visited.add(current_node)
+
+            if current_node == end_node_id:
+                return path
+
+            neighbors = [graph[current_node]['left_node'],
+                         graph[current_node]['right_node'],
+                         graph[current_node]['parent_node']]
+
+            for neighbor in neighbors:
+                if neighbor and neighbor not in visited:
+                    stack.append((neighbor, path + [neighbor]))
+
+        return None
+    
 
 
 class DecisionMazeAdventure:
