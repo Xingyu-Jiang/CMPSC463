@@ -73,18 +73,22 @@ game.start_game()
 
 # Print edges
 game.maze.print_edges()
+print()
 
 # Find the shortest path between nodes 1 and 12
 shortest_path = game.maze.shortest_path(1, 12)
 print("Shortest Path:", shortest_path)
+print()
 
 # Perform breadth-first search starting from node 1
 bfs_result = game.maze.breath_first_search(1)
 print("BFS Result:", bfs_result)
+print()
 
 # Perform depth-first search starting from node 1
 dfs_result = game.maze.depth_first_search(1)
 print("DFS Result:", dfs_result)
+print()
 ```
 Output Result
 ```plaintext
@@ -116,8 +120,41 @@ Edge: 7 -> 15
 Edge: 7 -> 3
 Edge: 14 -> 7
 Edge: 15 -> 7
+
 Shortest Path: [1, 3, 6, 12]
+
+Visited Node 1: {'left_node': 2, 'right_node': 3, 'parent_node': None}
+Visited Node 2: {'left_node': 4, 'right_node': 5, 'parent_node': 1}
+Visited Node 3: {'left_node': 6, 'right_node': 7, 'parent_node': 1}
+Visited Node 4: {'left_node': 8, 'right_node': 9, 'parent_node': 2}
+Visited Node 5: {'left_node': 10, 'right_node': 11, 'parent_node': 2}
+Visited Node 6: {'left_node': 12, 'right_node': 13, 'parent_node': 3}
+Visited Node 7: {'left_node': 14, 'right_node': 15, 'parent_node': 3}
+Visited Node 8: {'left_node': None, 'right_node': None, 'parent_node': 4}
+Visited Node 9: {'left_node': None, 'right_node': None, 'parent_node': 4}
+Visited Node 10: {'left_node': None, 'right_node': None, 'parent_node': 5}
+Visited Node 11: {'left_node': None, 'right_node': None, 'parent_node': 5}
+Visited Node 12: {'left_node': None, 'right_node': None, 'parent_node': 6}
+Visited Node 13: {'left_node': None, 'right_node': None, 'parent_node': 6}
+Visited Node 14: {'left_node': None, 'right_node': None, 'parent_node': 7}
+Visited Node 15: {'left_node': None, 'right_node': None, 'parent_node': 7}
 BFS Result: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+
+Visited Node 1: {'left_node': 2, 'right_node': 3, 'parent_node': None}
+Visited Node 3: {'left_node': 6, 'right_node': 7, 'parent_node': 1}
+Visited Node 7: {'left_node': 14, 'right_node': 15, 'parent_node': 3}
+Visited Node 15: {'left_node': None, 'right_node': None, 'parent_node': 7}
+Visited Node 14: {'left_node': None, 'right_node': None, 'parent_node': 7}
+Visited Node 6: {'left_node': 12, 'right_node': 13, 'parent_node': 3}
+Visited Node 13: {'left_node': None, 'right_node': None, 'parent_node': 6}
+Visited Node 12: {'left_node': None, 'right_node': None, 'parent_node': 6}
+Visited Node 2: {'left_node': 4, 'right_node': 5, 'parent_node': 1}
+Visited Node 5: {'left_node': 10, 'right_node': 11, 'parent_node': 2}
+Visited Node 11: {'left_node': None, 'right_node': None, 'parent_node': 5}
+Visited Node 10: {'left_node': None, 'right_node': None, 'parent_node': 5}
+Visited Node 4: {'left_node': 8, 'right_node': 9, 'parent_node': 2}
+Visited Node 9: {'left_node': None, 'right_node': None, 'parent_node': 4}
+Visited Node 8: {'left_node': None, 'right_node': None, 'parent_node': 4}
 DFS Result: [1, 3, 7, 15, 14, 6, 13, 12, 2, 5, 11, 10, 4, 9, 8]
 ```
 ### Test Result Explain
