@@ -49,6 +49,15 @@ class MazeNode:
         return self.node_id
 
 
+def get_node_info(node):
+    print(node.get_left_node().get_node_id())
+    print(node.get_right_node().get_node_id())
+    print(node.get_parent_node())
+    print(node.is_decision())
+    print(node.get_prompt())
+    print(node.get_node_id())
+
+
 def set_node_info(node, is_decision, prompt, node_id):
     node.set_decision_node(is_decision)
     node.set_prompt(prompt)
@@ -207,7 +216,7 @@ class Maze:
         # Node 15
         node15.set_parent_node(node7)
 
-        self.root_node = node1
+        self.set_root_node(node1)
 
     def to_graph(self):
         graph = {}
