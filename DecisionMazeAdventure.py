@@ -148,7 +148,7 @@ class Maze:
         node15.set_node_id(15)
         node15.set_prompt(" Node 15 : Bad End ")
 
-        # Connecting nodes and building tree
+        # Connecting nodes and building the maze
         # Node 1
         node1.set_left_node(node2)
         node1.set_right_node(node3)
