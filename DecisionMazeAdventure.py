@@ -66,66 +66,146 @@ class Maze:
         self.root_node = node
 
     def generate_maze(self):
-        node6 = MazeNode()
-        node6.set_decision_node(False)
-        node6.set_prompt("Node 6: End")
-        node6.set_node_id(6)
-
-        node7 = MazeNode()
-        node7.set_decision_node(False)
-        node7.set_prompt("Node 7: End")
-        node7.set_node_id(7)
-
-        node8 = MazeNode()
-        node8.set_decision_node(True)
-        node8.set_prompt("Node 8: left(node 6) or right (node 7)")
-        node8.set_left_node(node6)
-        node8.set_right_node(node7)
-        node6.set_parent_node(node8)
-        node7.set_parent_node(node8)
-        node8.set_node_id(8)
-
-        node9 = MazeNode()
-        node9.set_decision_node(False)
-        node9.set_prompt("Node 9: End")
-        node9.set_node_id(9)
-
-        node4 = MazeNode()
-        node4.set_decision_node(True)
-        node4.set_prompt("Node 4: left(node 8) or right (node 7)")
-        node4.set_left_node(node8)
-        node4.set_right_node(node7)
-        node8.set_parent_node(node4)
-        node7.set_parent_node(node4)
-        node4.set_node_id(4)
-
-        node5 = MazeNode()
-        node5.set_decision_node(False)
-        node5.set_prompt("Node 5: End")
-        node5.set_node_id(5)
-
-        node2 = MazeNode()
-        node2.set_decision_node(False)
-        node2.set_prompt("Node 2: End")
-        node2.set_node_id(2)
-
-        node3 = MazeNode()
-        node3.set_decision_node(True)
-        node3.set_prompt("Node 3: left(node 4) or right (node 5)")
-        node3.set_left_node(node4)
-        node3.set_right_node(node5)
-        node4.set_parent_node(node3)
-        node5.set_parent_node(node3)
-        node3.set_node_id(3)
-
+        # Node 1
         node1 = MazeNode()
+        node1.set_node_id(1)
         node1.set_decision_node(True)
-        node1.set_prompt("Node 1: left(node 2) or right(node 3)")
+        node1.set_prompt(" Node 1 : Left to Node 2 / Right to Node 3")
+
+        # Node 2
+        node2 = MazeNode()
+        node2.set_node_id(2)
+        node2.set_decision_node(True)
+        node2.set_prompt(" Node 2 : Left to Node 4 / Right to Node 5")
+
+        # Node 3
+        node3 = MazeNode()
+        node3.set_node_id(3)
+        node3.set_decision_node(True)
+        node3.set_prompt(" Node 3 : Left to Node 6 / Right to Node 7")
+
+        # Node 4
+        node4 = MazeNode()
+        node4.set_node_id(4)
+        node4.set_decision_node(True)
+        node4.set_prompt(" Node 4 : Left to Node 8 / Right to Node 9")
+
+        # Node 5
+        node5 = MazeNode()
+        node5.set_node_id(5)
+        node5.set_decision_node(True)
+        node5.set_prompt(" Node 5 : Left to Node 10 / Right to Node 11")
+
+        # Node 6
+        node6 = MazeNode()
+        node6.set_node_id(6)
+        node6.set_decision_node(True)
+        node6.set_prompt(" Node 6 : Left to Node 12 / Right to Node 13")
+
+        # Node 7
+        node7 = MazeNode()
+        node7.set_node_id(7)
+        node7.set_decision_node(True)
+        node7.set_prompt(" Node 7 : Left to Node 14 / Right to Node 15")
+
+        # Node 8
+        node8 = MazeNode()
+        node8.set_node_id(8)
+        node8.set_prompt(" Node 8 : Bad End ")
+
+        # Node 9
+        node9 = MazeNode()
+        node9.set_node_id(9)
+        node9.set_prompt(" Node 9 : Bad End ")
+
+        # Node 10
+        node10 = MazeNode()
+        node10.set_node_id(10)
+        node10.set_prompt(" Node 10 : Bad End ")
+
+        # Node 11
+        node11 = MazeNode()
+        node11.set_node_id(11)
+        node11.set_prompt(" Node 11 : Bad End ")
+
+        # Node 12
+        node12 = MazeNode()
+        node12.set_node_id(12)
+        node12.set_prompt(" Node 12 : Good End ")
+
+        # Node 13
+        node13 = MazeNode()
+        node13.set_node_id(13)
+        node13.set_prompt(" Node 13 : Bad End ")
+
+        # Node 14
+        node14 = MazeNode()
+        node14.set_node_id(14)
+        node14.set_prompt(" Node 14 : Bad End ")
+
+        # Node 15
+        node15 = MazeNode()
+        node15.set_node_id(15)
+        node15.set_prompt(" Node 15 : Bad End ")
+
+        # Connecting nodes and building tree
+        # Node 1
         node1.set_left_node(node2)
         node1.set_right_node(node3)
-        node3.set_parent_node(node1)
+
+        # Node 2
+        node2.set_left_node(node4)
+        node2.set_right_node(node5)
         node2.set_parent_node(node1)
-        node1.set_node_id(1)
+
+        # Node 3
+        node3.set_left_node(node6)
+        node3.set_right_node(node7)
+        node3.set_parent_node(node1)
+
+        # Node 4
+        node4.set_left_node(node8)
+        node4.set_right_node(node9)
+        node4.set_parent_node(node2)
+
+        # Node 5
+        node5.set_left_node(node10)
+        node5.set_right_node(node11)
+        node5.set_parent_node(node2)
+
+        # Node 6
+        node6.set_left_node(node12)
+        node6.set_right_node(node13)
+        node6.set_parent_node(node3)
+
+        # Node 7
+        node7.set_left_node(node14)
+        node7.set_right_node(node15)
+        node7.set_parent_node(node3)
+
+        # Node 8
+        node8.set_parent_node(node4)
+
+        # Node 9
+        node9.set_parent_node(node4)
+
+        # Node 10
+        node10.set_parent_node(node5)
+
+        # Node 11
+        node11.set_parent_node(node5)
+
+        # Node 12
+        node12.set_parent_node(node6)
+
+        # Node 13
+        node13.set_parent_node(node6)
+
+        # Node 14
+        node14.set_parent_node(node7)
+
+        # Node 15
+        node15.set_parent_node(node7)
 
         self.root_node = node1
 

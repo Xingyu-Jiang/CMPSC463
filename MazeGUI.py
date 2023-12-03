@@ -11,9 +11,10 @@ class MazeGUI:
         self.current_node = self.game.maze.get_root_node()
 
         self.master.title("Decision Maze Adventure")
-        self.master.geometry("325x270")
+        self.master.geometry("400x270")
+        self.master.resizable(False, False)
 
-        self.text_box = tk.Text(master, height=5, width=40)
+        self.text_box = tk.Text(master, height=5, width=50)
         self.text_box.insert(tk.END, self.current_node.get_prompt())
         self.text_box.config(state=tk.DISABLED)
         self.text_box.grid(row=0, column=0, columnspan=3)
@@ -76,7 +77,7 @@ class MazeGUI:
 
     def show_shortest_path(self):
         start_node_id = 1
-        end_node_id = 6
+        end_node_id = 12
         shortest_path = self.game.maze.shortest_path(start_node_id, end_node_id)
 
         if shortest_path:
@@ -91,9 +92,9 @@ class MazeGUI:
 
         if breath_first_search:
             path_str = ' -> '.join(str(node_id) for node_id in breath_first_search)
-            tk.messagebox.showinfo("Breath First Search", f"Breath First Search: {path_str}", icon='info')
+            tk.messagebox.showinfo("Breath First Search\n", f"Breath First Search: {path_str}", icon='info')
         else:
-            tk.messagebox.showinfo("Breath First Search", "No valid path found.", icon='info')
+            tk.messagebox.showinfo("Breath First Search\n", "No valid path found.", icon='info')
 
     def show_depth_first_path(self):
         start_node_id = 1
@@ -101,9 +102,9 @@ class MazeGUI:
 
         if depth_first_path:
             path_str = ' -> '.join(str(node_id) for node_id in depth_first_path)
-            tk.messagebox.showinfo("Depth-First Path", f"Depth-First Path: {path_str}", icon='info')
+            tk.messagebox.showinfo("Depth-First Search\n", f"Depth-First Path: {path_str}", icon='info')
         else:
-            tk.messagebox.showinfo("Depth-First Path", "No path found", icon='info')
+            tk.messagebox.showinfo("Depth-First Search\n", "No path found", icon='info')
 
 
 def main():
